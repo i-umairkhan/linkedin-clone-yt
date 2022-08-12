@@ -1,9 +1,16 @@
 import "./App.css";
+import Header from "./Components/Header/Header";
 
 function App() {
   return (
     <div className="app">
-      <h1>LinkedInClone</h1>
+      {/* Header */}
+      <Header />
+      {/* App Body */}
+      {/* Sidebar */}
+      {/* Feed */}
+      {/* Widgets */}
+      {/* App Body */}
     </div>
   );
 }

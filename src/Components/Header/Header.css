@@ -1,0 +1,27 @@
+.header {
+  display: flex;
+}
+.header__left {
+  display: flex;
+}
+.header__left > img {
+  height: 40px;
+  margin-right: 10px;
+  /* contain not changes aspect ratio while resiaing */
+  object-fit: contain;
+}
+.header__search {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  height: 22px;
+  color: gray;
+  background-color: #eef3f8;
+}
+
+.header__search > input {
+  outline: none;
+  border: none;
+  background: none;
+}
