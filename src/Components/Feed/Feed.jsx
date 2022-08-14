@@ -6,20 +6,41 @@ import EventNoteIcon from "@mui/icons-material/EventNote";
 import CalendarViewDayIcon from "@mui/icons-material/CalendarViewDay";
 import "./Feed.css";
 import Post from "../Post/Post";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { addPost, getPost } from "../../firebase";
 
 const Feed = () => {
+  const [input, setInput] = useState("");
   const [posts, setPosts] = useState([]);
-  const sendPost = (e) => {
+  const sendPost = async (e) => {
     e.preventDefault();
+    await addPost({
+      name: "Umair",
+      description: "Test Post",
+      message: input,
+      photoUrl: "",
+    });
+    setInput("");
   };
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getPost();
+      setPosts(data);
+    };
+    getData();
+  }, []); // add posts to dependecy array to get real time listner to db
+
   return (
     <div className="feed">
       <div className="feed__inputcontainer">
         <div className="feed__input">
           <CreateIcon />
           <form>
-            <input type="text" />
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+            />
             <button onClick={sendPost} type="submit">
               Send
             </button>
@@ -36,14 +57,15 @@ const Feed = () => {
           />
         </div>
       </div>
-      {posts.map((post) => {
-        <Post />;
-      })}
-      <Post
-        name="Umair Khan"
-        description="Hi this is linkedin clone made by me."
-        message="It is amazing"
-      />
+      {posts.map(({ id, data: { name, description, photoUrl, message } }) => (
+        <Post
+          key={id}
+          name={name}
+          description={description}
+          photourl={photoUrl}
+          message={message}
+        />
+      ))}
     </div>
   );
 };

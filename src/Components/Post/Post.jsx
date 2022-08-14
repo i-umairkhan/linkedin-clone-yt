@@ -10,14 +10,14 @@ const Post = ({ name, description, message, photourl }) => {
   return (
     <div className="post">
       <div className="post__header">
-        <Avatar />
+        <Avatar src={photourl} />
         <div className="post__info">
-          <h2>Umair Khan</h2>
-          <p>Description</p>
+          <h2>{name}</h2>
+          <p>{description}</p>
         </div>
       </div>
       <div className="post__body">
-        <p>Message goes hear</p>
+        <p>{message}</p>
       </div>
       <div className="post__button">
         <InputOption Icon={ThumbUpOffAltIcon} title="Like" color="gray" />
